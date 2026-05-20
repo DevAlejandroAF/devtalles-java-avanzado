@@ -1,0 +1,86 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <title>Document</title>
+</head>
+<body>
+
+<section>
+    <h2>Personal Details</h2>
+    <div class="profile-image">
+        <img th:src="@{/img/fotocv.png}" alt="Your Profile Picture" width="150">
+    </div>
+    <div>
+        <strong>First Name:</strong> <span th:text="${cvData.personalDetails.firstName}" ></span>
+    </div>
+    <div>
+        <strong>Last Name:</strong> <span th:text="${cvData.personalDetails.lastName}"></span>
+    </div>
+    <div>
+        <strong>Email:</strong> <span th:text="${cvData.personalDetails.email}"></span>
+    </div>
+    <div>
+        <strong>Profile:</strong> <span th:text="${cvData.personalDetails.professionalProfile}"></span>
+    </div>
+</section>
+<section>
+    <h2>Education</h2>
+    <div class="cv-item" th:each="education, stat : ${cvData.educations}" >
+        <h3>Education <span th:text="${stat.index + 1}"></span></h3>
+        <div>
+            <strong>Institution:</strong> <span th:text="${education.institution}"> </span>
+        </div>
+        <div>
+            <strong>Degree:</strong> <span th:text="${education.degree}"></span>
+        </div>
+        <div>
+            <strong>Period:</strong> <span th:text="${education.period}"></span>
+        </div>
+        <div th:if="${education.description != null and !education.description.trim().isEmpty()}">
+            <strong>Description:</strong> <span th:text="${education.description}"></span>
+        </div>
+    </div>
+</section>
+<section>
+    <h2>Experience</h2>
+    <div th:each="experience, stat : ${cvData.experiences}" class="cv-item">
+        <h3>Experience <span th:text="${stat.index + 1}"></span></h3>
+        <div>
+            <strong>Job Title:</strong> <span th:text="${experience.jobTitle}"></span>
+        </div>
+        <div>
+            <strong>Company:</strong> <span th:text="${experience.company}"></span>
+        </div>
+        <div>
+            <strong>Period:</strong> <span th:text="${experience.period}"></span>
+        </div>
+        <div th:if="${experience.description}">
+            <strong>Description:</strong> <span th:text="${experience.description}"></span>
+        </div>
+    </div>
+</section>
+
+<section>
+    <h2>Skills</h2>
+    <div th:each="skill, stat : ${cvData.skills}" class="cv-item">
+        <div>
+            <strong>Skill:</strong> <span th:text="${skill.name}"></span>
+        </div>
+        <div>
+            <strong>Level:</strong> <span th:text="${skill.level}"></span>
+        </div>
+    </div>
+</section>
+<section>
+    <h2>Connect with me</h2>
+    <div class="social-links">
+        <a href="https://www.linkedin.com/in/gabrielchaldu" target="_blank">LinkedIn</a> |
+        <a href="https://github.com/gabrielchaldu" target="_blank">GitHub</a> |
+        <a href="#" target="_blank">Twitter</a>
+    </div>
+</section>
+</body>
+</html>
